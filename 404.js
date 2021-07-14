@@ -15,20 +15,19 @@
  *    background, createCanvas, height, image, loadImage, width
  */
 
-let dvdImage, imgW, imgH;
+let img, imgW, imgH;
 
 function preload() {
     img = loadImage("404.jpg");
 }
 
 function setup() {
-    createCanvas(545, 316);
-    imgW = 545;
-    imgH = 316;
+    createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
     background(165, 169, 196);
-
-    image(img, 0, 0, imgW, imgH);
+    var scale = 0.5;
+    imageMode(CENTER);
+    image(img, 0.5 * width, 0.5 * height, scale * width, scale * img.height * width / img.width);
 }

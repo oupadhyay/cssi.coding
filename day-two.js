@@ -15,25 +15,24 @@
  *    background, createCanvas, height, image, loadImage, width
  */
 
-let dvdImage, logoWidth, logoHeight;
 let x, y, xVel, yVel;
-
+let dvdImage, logoWidth, logoHeight;
 function preload() {
     dvdImage = loadImage("dvd.png");
 }
 
 function setup() {
-    createCanvas(400, 400);
-    logoWidth = 80;
-    logoHeight = 60;
+    createCanvas(windowWidth, windowHeight);
+    logoWidth = 160;
+    logoHeight = 120;
     x = 0;
     y = 0;
-    xVel = 1;
-    yVel = 1;
+    xVel = 5;
+    yVel = 5;
 }
 
 function draw() {
-    background(20);
+    background(100);
 
     if (x > width - logoWidth || x < 0) {
         xVel = -1 * xVel;
