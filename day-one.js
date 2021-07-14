@@ -1,15 +1,3 @@
-/**
- * File: /Users/ojaswupadhyay/Dropbox (GaTech)/coding/cssi.coding/day-one.js
- * Project: /day-one.js
- * Created Date: Tuesday, July 13th 2021, 3:00:04 pm
- * Author: Ojasw Upadhyay
- * ----------------------------------------------------
- * Last Modified: Tue Jul 13 2021
- * Modified By: Ojasw Upadhyay
- * ----------------------------------------------------
- * Copyright (c) 2021 Ojasw Upadhyay
- */
-
 let helvetica_neue;
 function preload() {
     helvetica_neue = loadFont("HelveticaNeue-Regular.otf");
