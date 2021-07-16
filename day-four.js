@@ -98,7 +98,7 @@ function keyPressed() {
 }
 
 class Path {
-    constructor (hue) {
+    constructor () {
         this.particles = [];
         this.hue = hue;
     }
@@ -134,7 +134,7 @@ class Path {
 }
 
 class Particle {
-    constructor (position, force, hue) {
+    constructor (position, force) {
         this.position = createVector(position.x, position.y);
         this.velocity = createVector(force.x, force.y);
         this.drag = 0.9;
