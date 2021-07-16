@@ -7,7 +7,7 @@ let hue = 0;
 let globalS = 50;
 let globalB = 80;
 function preload() {
-    firacode = loadFont("Fira-Code.ttf");
+    firacode = loadFont("/assets/Fira-Code.ttf");
 }
 
 function setup() {

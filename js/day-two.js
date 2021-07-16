@@ -1,7 +1,7 @@
 let x, y, xVel, yVel;
 let dvdImage, logoWidth, logoHeight;
 function preload() {
-    dvdImage = loadImage("dvd.png");
+    dvdImage = loadImage("/assets/dvd.png");
 }
 
 function setup() {
