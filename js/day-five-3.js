@@ -1,10 +1,3 @@
-// Be sure to name any p5.js functions we use in the global so Glitch can recognize them.
-// Add to this list as you consult the p5.js documentation for other functions.
-/* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
-          rect, ellipse, stroke, text, 
-          mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize, loadFont, angleMode, noLoop, DEGREES, shuffle, triangle, round, arc, textFont, translate, redraw, keyCode  */
-
 let canvasW, canvasH, textColor, firacode;
 
 // Set colour palettes
