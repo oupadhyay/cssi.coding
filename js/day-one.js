@@ -1,6 +1,6 @@
 let helvetica_neue;
 function preload() {
-    helvetica_neue = loadFont("/assets/HelveticaNeue-Regular.otf");
+    helvetica_neue = loadFont("/cssi.coding/assets/HelveticaNeue-Regular.otf");
 }
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
