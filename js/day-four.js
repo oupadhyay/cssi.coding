@@ -7,7 +7,7 @@ let hue = 0;
 let globalS = 50;
 let globalB = 80;
 function preload() {
-    firacode = loadFont("/assets/Fira-Code.ttf");
+    firacode = loadFont("/cssi.coding/assets/Fira-Code.ttf");
 }
 
 function setup() {
@@ -58,8 +58,10 @@ function draw() {
 function mousePressed() {
     next = 0;
     painting = true;
-    previous.x = mouseX;
-    previous.y = mouseY;
+    if (previous) {
+        previous.x = mouseX;
+        previous.y = mouseY;
+    }
     hue += millis() / 100;
     if (hue >= 360) {
         hue = 0;
