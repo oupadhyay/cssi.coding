@@ -37,7 +37,13 @@ function handleCollision() {
 
 function handleTime() {
     if (time > 0) {
-        time -= 1;
+        if (time < 100) {
+            time -= 0.1;
+        } else if (time < 50) {
+            time -= 0.01;
+        } else {
+            time -= 1;
+        }
     } else {
         gameIsOver = true;
         text(`Game over`, 20, 60);
