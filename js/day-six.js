@@ -29,7 +29,6 @@ function draw() {
         }
     }
 
-
     blob.show();
     blob.update();
 
