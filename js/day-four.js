@@ -171,7 +171,7 @@ function pad(num, size) {
         num = num.toString();
         num = parseInt(num).toString();
         while (num.length < size) num = "0" + num;
-        while (num.length > size) num = num.slice(0, 3);
+        while (num.length > size) num = num.slice(0, size);
     }
     return num;
 }
