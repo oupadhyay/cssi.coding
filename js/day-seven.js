@@ -31,9 +31,7 @@ function draw() {
 }
 
 function keyPressed() {
-    if (gameIsOver) {
-        console.log("Game over - user input ignored.");
-    } else if (keyCode === UP_ARROW) {
+    if (keyCode === UP_ARROW) {
         frogY -= 10;
     } else if (keyCode === LEFT_ARROW) {
         frogX -= 10;
@@ -45,11 +43,11 @@ function keyPressed() {
 }
 
 function moveCars() {
+    // Move the car...
     car1X += car1V;
+    // and reset if it moves off screen
     if (car1X >= width) {
         car1X = -30;
-        // Move the car to a random vertical location
-        car1Y = random(100, 400);
     }
 }
 
@@ -59,9 +57,10 @@ function drawCars() {
 }
 
 function checkCollisions() {
-    // Check for Car 1
+    // Check for Car 1 collision, and if so...
     if (collideRectCircle(car1X, car1Y, 40, 30, frogX, frogY, 20)) {
         console.log("collided with Car 1");
+        // ...reset frog and subtract a life.
         frogY = 450;
         lives -= 1;
     }
@@ -74,39 +73,20 @@ function checkWin() {
     if (frogY <= 50) {
         score += 1;
         frogY = 450;
-        // Make the car faster each time you score (increasing difficulty per level)
-        car1V += 2;
-    }
-    if (score === 5) {
-        gameIsOver = true;
     }
 }
 
 function displayScores() {
     textSize(12);
-    fill(0);
     // Display Lives
-    text(`Lives: `, 10, 20);
-    fill(120, 80, 80);
-    if (lives >= 1) {
-        ellipse(50, 16, 10, 10);
-    }
-    if (lives >= 2) {
-        ellipse(65, 16, 10, 10);
-    }
-    if (lives >= 3) {
-        ellipse(80, 16, 10, 10);
-    }
+    fill(0);
+    text(`Lives: ${lives}`, 10, 20);
     // Display Score
     fill(0);
     text(`Score: ${score}`, 10, 38);
-    // Display game over message, win or lose
+    // Display game over message
     if (gameIsOver) {
         textSize(60);
-        if (lives >= 1) {
-            text("YOU WIN!", 110, height / 2);
-        } else {
-            text("GAME OVER", 70, height / 2);
-        }
+        text("GAME OVER", 70, height / 2);
     }
 }
