@@ -1,77 +1,98 @@
-let brushHue, backgroundColor, coinX, coinY, score, time, gameIsOver, hit, resetButton, coinValue;
+var blob;
+
+var blobs = [];
+var zoom = 1;
 
 function setup() {
-    // Canvas & color settings
-    createCanvas(400, 400);
-    colorMode(HSB, 360, 100, 100);
-    brushHue = 0;
-    backgroundColor = 95;
-
-    // Initialize game.
-    resetGame();
-
-    resetButton = createButton('RESET GAME');
-    //resetButton.position(50, 120);
-    resetButton.mousePressed(resetGame);
+    createCanvas(600, 600);
+    blob = new Blob(0, 0, 64);
+    for (var i = 0; i < 2000; i++) {
+        var x = random(-3 * width, 3 * width);
+        var y = random(-3 * height, 3 * height);
+        blobs[i] = new smallBlob(x, y, 16);
+    }
 }
-
 
 function draw() {
-    background(backgroundColor);
+    background(0);
 
-    handleTime();
-    if (!gameIsOver) {
-        // ! <- negation (aka NOT) false -> true, true -> false
-        handleCollision();
+    translate(width / 2, height / 2);
+    var newzoom = 64 / blob.r;
+    zoom = lerp(zoom, newzoom, 0.1);
+    scale(zoom);
+    translate(-blob.pos.x, -blob.pos.y);
+
+    for (var i = blobs.length - 1; i >= 0; i--) {
+        blobs[i].show();
+        if (blob.eats(blobs[i])) {
+            blobs.splice(i, 1);
+        }
     }
 
-    // Draw the coin
-    ellipse(coinX, coinY, 20);
 
-    // Draw the cursor at the mouse position
-    ellipse(mouseX, mouseY, 20);
-
-    // Add text with the time remaining: 
-    text(`Your score is: ${score}`, 20, 20);
-    text(`Time remaining: ${time}`, 20, 40);
-    if (gameIsOver) {
-        text('Game Over', 20, 60);
-    }
-    text(`Colliding: ${hit}`, 20, 80);
-}
-
-function handleCollision() {
-    // We'll write code for what happens if your character hits a coin.
-    hit = collideCircleCircle(coinX, coinY, 20, mouseX, mouseY, 20);
-    if (hit) {
-        score += coinValue;
-        moveCoin();
-    }
-}
-
-function handleTime() {
-    // We'll write code to handle the time.
-    if (time > 0) {
-        time -= 1;
-    } else {
-        gameIsOver = true;
-    }
-}
-
-function moveCoin() {
-    coinX = random(width);
-    coinY = random(height);
-    coinValue = floor(random(5)) + 1; // 0 ~ 4.999999
+    blob.show();
+    blob.update();
 
 }
 
-function resetGame() {
-    // Get random coordinates for the starting position of the coin (coinX, coinY)
-    moveCoin();
+function Blob(x, y, r) {
+    this.pos = createVector(x, y);
+    this.r = r;
+    this.vel = createVector(0, 0);
 
-    time = 1000;
-    gameIsOver = false;
-    hit = false;
-    score = 0;
-    coinValue = 1;
+    this.update = function () {
+        var newvel = createVector(mouseX - width / 2, mouseY - height / 2);
+        newvel.setMag(3);
+        this.vel.lerp(newvel, 0.2);
+        this.pos.add(this.vel);
+    }
+
+    this.eats = function (other) {
+        var d = p5.Vector.dist(this.pos, other.pos);
+        if (d < this.r + other.r) {
+            var sum = PI * this.r * this.r + PI * other.r * other.r;
+            this.r = sqrt(sum / PI);
+            //this.r += other.r;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    this.show = function () {
+        fill(56, 34, 200);
+        ellipse(this.pos.x, this.pos.y, this.r * 2, this.r * 2);
+    }
+}
+
+function smallBlob(x, y, r) {
+    this.pos = createVector(x, y);
+    this.r = r;
+    this.vel = createVector(0, 0);
+
+    this.update = function () {
+        var newvel = createVector(mouseX - width / 2, mouseY - height / 2);
+        newvel.setMag(3);
+        this.vel.lerp(newvel, 0.2);
+        this.pos.add(this.vel);
+    }
+
+    this.eats = function (other) {
+        var d = p5.Vector.dist(this.pos, other.pos);
+        if (d < this.r + other.r) {
+            var sum = PI * this.r * this.r + PI * other.r * other.r;
+            this.r = sqrt(sum / PI);
+            //this.r += other.r;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    var color1 = random(0, 255);
+    var color2 = random(0, 255);
+    var color3 = random(0, 255);
+    this.show = function () {
+        fill(color1, color2, color3);
+        ellipse(this.pos.x, this.pos.y, this.r * 2, this.r * 2);
+    }
 }
