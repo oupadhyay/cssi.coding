@@ -63,7 +63,7 @@ class Drop {
             noFill();
             let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))));
             if (color) {
-                stroke(this.hue, st, st - 25);
+                stroke(this.hue, st - 25, st);
             } else {
                 stroke(st);
             }
