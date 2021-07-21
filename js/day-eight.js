@@ -105,7 +105,7 @@ class Drop {
         if (this.falling) {
 
             if (color) {
-                stroke(this.hue, this.sat - this.h / 2, this.val - this.h / 2);
+                stroke(this.hue, this.sat - this.h / 2, this.val - this.h / 2, 255 - this.h / 10);
             } else {
                 let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))));
                 stroke(st);
@@ -127,7 +127,7 @@ class Drop {
             noFill();
 
             if (color) {
-                stroke(this.hue, this.sat - this.h / 5, Math.max(25, this.val - this.h / 5), 255 - this.h / 20);
+                stroke(this.hue, this.sat - this.h / 5, Math.max(25, this.val - this.h / 5), 255 - this.h / 10);
             } else {
                 let st = Math.max(25, 230 - (this.h / 1.5));
                 stroke(st);
