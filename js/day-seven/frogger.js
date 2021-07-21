@@ -16,7 +16,7 @@ function resetLevel() {
 
 function setup() {
   spritesEngine = new spritesEngine();
-  let width = 500;
+  width = 500;
   level = new Level(grid_size, width, nbRows);
   var canvas = createCanvas(width, level.rows.length * grid_size);
   canvas.parent('#canvas');
