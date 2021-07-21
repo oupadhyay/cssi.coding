@@ -25,7 +25,7 @@ function setup() {
 
 function draw() {
   background(0);
-  for (i in level.backgroundRectangles) {
+  for (let i in level.backgroundRectangles) {
     var bg = i;
     fill(bg.color.r, bg.color.g, bg.color.b);
     rect(bg.x0, bg.y0, bg.x1, bg.y1);
@@ -33,7 +33,7 @@ function draw() {
 
   var intersects = null;
 
-  for (j in level.rows) {
+  for (let j in level.rows) {
     j.show();
     j.update();
     if (frog.intersects(j)) {
