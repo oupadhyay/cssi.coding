@@ -6,7 +6,7 @@ var gravity = 0.2;
 var growth;
 var num = 50;
 var trails = -10;
-const arr = ["#152A3B", "#0D809C", "#F5C03E", "#D63826", "#EBEBD6"].map(hex => hexToRgb(hex));
+let arr;
 
 const hexToRgb = hex =>
     hex.replace(
@@ -27,6 +27,7 @@ async function setup() {
     colorMode(HSB, 360, 100, 100);
     growth = Math.max(windowWidth / 200, windowHeight / 200);
     color = false;
+    arr = ["#152A3B", "#0D809C", "#F5C03E", "#D63826", "#EBEBD6"].map(hex => hexToRgb(hex));
 
     background(25);
     for (var i = 0; i < num; i++) {
