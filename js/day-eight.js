@@ -1,6 +1,4 @@
-// var globalS = 50;
-// var globalB = 55;
-var firacode, color;
+var color;
 var drops = [];
 var gravity = 0.2;
 var growth;
@@ -13,21 +11,16 @@ const hexToRgb = hex =>
         /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
         (m, r, g, b) => `#${r}${r}${g}${g}${b}${b}`,
     )
-    .substring(1)
-    .match(/.{2}/g)
-    .map(x => parseInt(x, 16));
-
-function preload() {
-    firacode = loadFont("/cssi.coding/assets/Fira-Code.ttf");
-}
+        .substring(1)
+        .match(/.{2}/g)
+        .map(x => parseInt(x, 16));
 
 async function setup() {
     createCanvas(windowWidth, windowHeight);
-    textFont(firacode, 24);
     colorMode(HSB, 360, 100, 100);
     growth = Math.max(windowWidth / 200, windowHeight / 200);
     color = false;
-    arr = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"].map(hex => hexToRgb(hex));
+    arr = ["#f1c6ca", "#f1ddc6", "#f1f1c6", "#c6f1cf", "#c6ddf1"].map(hex => hexToRgb(hex));
 
     background(25);
     for (var i = 0; i < num; i++) {
@@ -37,7 +30,7 @@ async function setup() {
 }
 
 class Drop {
-    constructor() {
+    constructor () {
         var rand = _.random(0, arr.length);
         this.hue = arr[rand];
         this.x = random(width);
@@ -54,7 +47,7 @@ class Drop {
         if (this.falling) {
             let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))))
             if (color) {
-                stroke(this.hue, st, 25 + st);
+                stroke(this.hue, 100 - (this.h / 5), 25 + (86 - (this.h / 7)));
             } else {
                 stroke(st);
             }
