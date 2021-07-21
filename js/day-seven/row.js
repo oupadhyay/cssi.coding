@@ -13,15 +13,15 @@ Row.prototype = Object.create(Rectangle.prototype);
 
 // Shows this Row, showing all obstacles on it.
 Row.prototype.show = function () {
-  for (let i in this.obstacles) {
-    i.show();
+  for (var i = 0; i < this.obstacles.length; i++) {
+    this.obstacles[i].show();
   }
 }
 
 // Update all obstacles on this row.
 Row.prototype.update = function() {
-  for (let i in this.obstacles) {
-    i.update();
+  for (var i = 0; i < this.obstacles.length; i++) {
+    this.obstacles[i].update();
   }
 }
 
@@ -29,9 +29,9 @@ Row.prototype.update = function() {
 // Calculates which obstacle, if any, the collider has intersected.
 Row.prototype.hits = function(collider) {
   var obstacle = null;
-  for (let i in this.obstacles) {
-    if (collider.intersects(i)) {
-      obstacle = i;
+  for (var i = 0; i < this.obstacles.length; i++) {
+    if (collider.intersects(this.obstacles[i])) {
+      obstacle = this.obstacles[i];
     }
   }
   return obstacle;
