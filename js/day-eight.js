@@ -27,7 +27,7 @@ async function setup() {
     colorMode(HSB, 360, 100, 100);
     growth = Math.max(windowWidth / 200, windowHeight / 200);
     color = false;
-    arr = ["#152A3B", "#0D809C", "#F5C03E", "#D63826", "#EBEBD6"].map(hex => hexToRgb(hex));
+    arr = ["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff"].map(hex => hexToRgb(hex));
 
     background(25);
     for (var i = 0; i < num; i++) {
