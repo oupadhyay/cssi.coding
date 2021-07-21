@@ -14,29 +14,31 @@ async function setup() {
     }
 }
 
-function Drop() {
-    this.x = random(width);
-    this.y = -10;
-    this.w = 20;
-    this.h = 10;
-    this.length = 10;
-    this.speed = random(0, 2);
-    this.endY = random(200, 400);
-    this.falling = true;
+class Drop {
+    constructor () {
+        this.x = random(width);
+        this.y = -10;
+        this.w = 20;
+        this.h = 10;
+        this.length = 10;
+        this.speed = random(0, 2);
+        this.endY = random(200, 400);
+        this.falling = true;
+    }
 
-    this.show = function () {
+    show = function () {
         if (this.falling) {
             stroke(230);
             line(this.x, this.y, this.x, this.y + this.length);
         }
     };
 
-    this.fall = function () {
+    fall = function () {
         this.y = this.y + this.speed;
         this.speed = this.speed + gravity;
     };
 
-    this.puddle = function () {
+    puddle = function () {
         if (this.y > this.endY) {
             this.speed = 0;
             this.length = 0;
@@ -50,7 +52,7 @@ function Drop() {
         }
     };
 
-    this.reset = function () {
+    reset = function () {
         if (this.h > height) {
             this.x = random(width);
             this.y = -10;
@@ -67,7 +69,7 @@ function Drop() {
 function draw() {
     background(25);
 
-    for (var drop in drops) {
+    for (var drop of drops) {
         drop.show();
         drop.fall();
         drop.puddle();
