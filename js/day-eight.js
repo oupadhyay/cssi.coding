@@ -56,7 +56,7 @@ class Drop {
             this.length = 0;
             noFill();
             let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))));
-            stroke(st);
+            stroke(this.hue, st, 25 + st);
             ellipse(this.x, this.y, this.w, this.h);
             this.w = this.w + growth;
             this.h = this.h + growth / 2;
