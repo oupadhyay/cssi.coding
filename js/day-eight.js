@@ -6,6 +6,7 @@ var gravity = 0.2;
 var growth;
 var num = 50;
 var trails = -10;
+const arr = ["#152A3B", "#0D809C", "#F5C03E", "#D63826", "#EBEBD6"];
 
 function preload() {
     firacode = loadFont("/cssi.coding/assets/Fira-Code.ttf");
@@ -27,7 +28,8 @@ async function setup() {
 
 class Drop {
     constructor () {
-        this.hue = random(0, 360);
+        var rand = _.random(0, arr.length);
+        this.hue = arr[rand];
         this.x = random(width);
         this.y = -10;
         this.w = 20;
