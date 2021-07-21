@@ -25,7 +25,7 @@ function setup() {
 
 function draw() {
   background(0);
-  for (var i = 0; i < level.backgroundRectangles.length; i++) {
+  for(var i=0; i<level.backgroundRectangles.length; i++) {
     var bg = level.backgroundRectangles[i];
     fill(bg.color.r, bg.color.g, bg.color.b);
     rect(bg.x0, bg.y0, bg.x1, bg.y1);
@@ -33,12 +33,12 @@ function draw() {
 
   var intersects = null;
 
-  for (var i = 0; i < level.rows.length; i++) {
+  for(var i = 0; i < level.rows.length; i++) {
     level.rows[i].show();
     level.rows[i].update();
-    if (frog.intersects(level.rows[i])) {
+    if(frog.intersects(level.rows[i])) {
       intersects = level.rows[i].hits(frog);
-      if ((intersects !== null) ^ level.rows[i].inverted) {
+      if((intersects !== null) ^ level.rows[i].inverted) {
         resetGame();
       }
     }
