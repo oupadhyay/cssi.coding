@@ -1,3 +1,4 @@
+/*jshint esversion: 8 */
 var color;
 var drops = [];
 var gravity = 0.2;
@@ -60,7 +61,7 @@ const rgbToHsl = (rgb) => {
     return [r, g, b];
 }
 
-const hexToRgb = hex =>
+const hexToRgb = (hex) =>
     hex.replace(
         /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
         (m, r, g, b) => `#${r}${r}${g}${g}${b}${b}`,
@@ -71,7 +72,7 @@ const hexToRgb = hex =>
 
 async function setup() {
     createCanvas(windowWidth, windowHeight);
-    colorMode(HSB, 360, 100, 100);
+    colorMode(HSB, 360, 100, 100, 255);
     growth = Math.max(windowWidth / 200, windowHeight / 200);
     color = false;
     arr = ["#f1c6ca", "#f1ddc6", "#f1f1c6", "#c6f1cf", "#c6ddf1"].map(hex => rgbToHsl(hexToRgb(hex)));
@@ -87,7 +88,9 @@ async function setup() {
 class Drop {
     constructor () {
         qNum = shuffle(qNum);
-        this.hue = arr[qNum[0]];
+        this.hue = arr[qNum[0]][0];
+        this.sat = arr[qNum[0]][1];
+        this.val = arr[qNum[0]][2];
         this.x = random(width);
         this.y = -10;
         this.w = 20;
@@ -100,31 +103,33 @@ class Drop {
 
     show = function () {
         if (this.falling) {
-            let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))))
+
             if (color) {
-                stroke(this.hue, 100 - (this.h / 5), 25 + (86 - (this.h / 7)));
+                stroke(this.hue, this.sat - this.h / 2, this.val - this.h / 2);
             } else {
+                let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))));
                 stroke(st);
             }
             strokeWeight(1.5);
             line(this.x, this.y, this.x, this.y + this.length);
         }
-    };
+    }
 
     fall = function () {
         this.y = this.y + this.speed;
         this.speed = this.speed + gravity;
-    };
+    }
 
     puddle = function () {
         if (this.y > this.endY) {
             this.speed = 0;
             this.length = 0;
             noFill();
-            let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))));
+
             if (color) {
-                stroke(this.hue, st - 25, st);
+                stroke(this.hue, this.sat - this.h / 5, Math.max(25, this.val - this.h / 5), 255 - this.h / 20);
             } else {
+                let st = Math.max(25, 230 - (this.h / 1.5));
                 stroke(st);
             }
             ellipse(this.x, this.y, this.w, this.h);
@@ -132,7 +137,7 @@ class Drop {
             this.h = this.h + growth / 2;
             this.falling = false;
         }
-    };
+    }
 
     reset = function () {
         if (this.h > height) {
@@ -144,7 +149,7 @@ class Drop {
             this.h = 15;
             this.falling = true;
         }
-    };
+    }
 }
 
 
@@ -169,4 +174,3 @@ function mousePressed() {
     color = !color;
     redraw();
 }
-
