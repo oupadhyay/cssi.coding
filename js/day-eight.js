@@ -1,11 +1,20 @@
+// var globalS = 50;
+// var globalB = 55;
+var firacode;
 var drops = [];
 var gravity = 0.2;
 var growth;
 var num = 50;
 var trails = -10;
 
+function preload() {
+    firacode = loadFont("/cssi.coding/assets/Fira-Code.ttf");
+}
+
 async function setup() {
     createCanvas(windowWidth, windowHeight);
+    textFont(firacode, 24);
+    colorMode(HSB, 360, 100, 100);
     growth = Math.max(windowWidth / 200, windowHeight / 200);
     background(25);
     for (var i = 0; i < num; i++) {
@@ -16,6 +25,7 @@ async function setup() {
 
 class Drop {
     constructor () {
+        this.hue = random(0, 360);
         this.x = random(width);
         this.y = -10;
         this.w = 20;
@@ -28,7 +38,9 @@ class Drop {
 
     show = function () {
         if (this.falling) {
-            stroke(230);
+            let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))))
+            stroke(this.hue, st, 25 + st);
+            strokeWeight(1.5);
             line(this.x, this.y, this.x, this.y + this.length);
         }
     };
