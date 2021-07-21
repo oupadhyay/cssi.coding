@@ -22,7 +22,7 @@ class Drop {
         this.h = 10;
         this.length = 10;
         this.speed = random(0, 2);
-        this.endY = random(200, 400);
+        this.endY = random(2 * height / 3, height);
         this.falling = true;
     }
 
@@ -43,7 +43,7 @@ class Drop {
             this.speed = 0;
             this.length = 0;
             noFill();
-            let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width, height)))));
+            let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))));
             stroke(st);
             ellipse(this.x, this.y, this.w, this.h);
             this.w = this.w + growth;
@@ -75,13 +75,6 @@ function draw() {
         drop.puddle();
         drop.reset();
     }
-
-    // for (var i = 0; i < drops.length; i = i + 1) {
-    //     drops[i].show();
-    //     drops[i].fall();
-    //     drops[i].puddle();
-    //     drops[i].reset();
-    // }
 }
 
 function sleep(millisecondsDuration) {
