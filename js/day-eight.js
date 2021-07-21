@@ -5,6 +5,60 @@ var growth;
 var num = 50;
 var trails = -10;
 let arr;
+let qNum = [0, 1, 2, 3, 4];
+
+const rgbToHsl = (rgb) => {
+    let r = rgb[0];
+    let g = rgb[1];
+    let b = rgb[2];
+
+    // Make r, g, and b fractions of 1
+    r /= 255;
+    g /= 255;
+    b /= 255;
+
+    // Find greatest and smallest channel values
+    let cmin = Math.min(r, g, b),
+        cmax = Math.max(r, g, b),
+        delta = cmax - cmin,
+        h = 0,
+        s = 0,
+        l = 0;
+
+    // Calculate hue
+    // No difference
+    if (delta == 0)
+        h = 0;
+    // Red is max
+    else if (cmax == r)
+        h = ((g - b) / delta) % 6;
+    // Green is max
+    else if (cmax == g)
+        h = (b - r) / delta + 2;
+    // Blue is max
+    else
+        h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+
+    // Make negative hues positive behind 360°
+    if (h < 0)
+        h += 360;
+    // Calculate lightness
+    l = (cmax + cmin) / 2;
+
+    // Calculate saturation
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+    // Multiply l and s by 100
+    s = +(s * 100).toFixed(1);
+    l = +(l * 100).toFixed(1);
+
+    r = h;
+    g = s;
+    b = l;
+    return [r, g, b];
+}
 
 const hexToRgb = hex =>
     hex.replace(
@@ -20,7 +74,8 @@ async function setup() {
     colorMode(HSB, 360, 100, 100);
     growth = Math.max(windowWidth / 200, windowHeight / 200);
     color = false;
-    arr = ["#f1c6ca", "#f1ddc6", "#f1f1c6", "#c6f1cf", "#c6ddf1"].map(hex => hexToRgb(hex));
+    arr = ["#f1c6ca", "#f1ddc6", "#f1f1c6", "#c6f1cf", "#c6ddf1"].map(hex => rgbToHsl(hexToRgb(hex)));
+    print(arr);
 
     background(25);
     for (var i = 0; i < num; i++) {
@@ -31,8 +86,8 @@ async function setup() {
 
 class Drop {
     constructor () {
-        var rand = _.random(0, arr.length);
-        this.hue = arr[rand];
+        qNum = shuffle(qNum);
+        this.hue = arr[qNum[0]];
         this.x = random(width);
         this.y = -10;
         this.w = 20;
@@ -114,3 +169,4 @@ function mousePressed() {
     color = !color;
     redraw();
 }
+
