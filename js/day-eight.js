@@ -5,7 +5,7 @@ var num = 20;
 var trails = -10;
 
 async function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth - 1, windowHeight - 1);
     growth = Math.max(windowWidth / 200, windowHeight / 200);
     background(25);
     for (var i = 0; i < num; i++) {
