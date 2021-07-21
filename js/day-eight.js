@@ -1,6 +1,6 @@
 // var globalS = 50;
 // var globalB = 55;
-var firacode;
+var firacode, color;
 var drops = [];
 var gravity = 0.2;
 var growth;
@@ -16,6 +16,8 @@ async function setup() {
     textFont(firacode, 24);
     colorMode(HSB, 360, 100, 100);
     growth = Math.max(windowWidth / 200, windowHeight / 200);
+    color = false;
+
     background(25);
     for (var i = 0; i < num; i++) {
         await sleep(400)
@@ -39,7 +41,11 @@ class Drop {
     show = function () {
         if (this.falling) {
             let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))))
-            stroke(this.hue, st, 25 + st);
+            if (color) {
+                stroke(this.hue, st, 25 + st);
+            } else {
+                stroke(st);
+            }
             strokeWeight(1.5);
             line(this.x, this.y, this.x, this.y + this.length);
         }
@@ -56,7 +62,11 @@ class Drop {
             this.length = 0;
             noFill();
             let st = Math.max(25, 230 - (this.h / (600 / (Math.max(width / 2, height / 2)))));
-            stroke(this.hue, st, 25 + st);
+            if (color) {
+                stroke(this.hue, st, 25 + st);
+            } else {
+                stroke(st);
+            }
             ellipse(this.x, this.y, this.w, this.h);
             this.w = this.w + growth;
             this.h = this.h + growth / 2;
@@ -93,4 +103,9 @@ function sleep(millisecondsDuration) {
     return new Promise((resolve) => {
         setTimeout(resolve, millisecondsDuration);
     })
+}
+
+function mousePressed() {
+    color = !color;
+    redraw();
 }
