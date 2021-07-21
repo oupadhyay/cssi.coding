@@ -45,7 +45,7 @@ function Level(grid_size, width, nbRows) {
         this.rows.push(new Row(i * this.grid_size, nbElements, speed, obstacleWidth * this.grid_size, spacing, offset, z1 === 'CARS'));
       }
     }
-    //On ajoute la derniere SZ
+
     this.rows.push(new Row((this.nbRows - 1) * this.grid_size, 1, 0, this.width, 0, 0, true));
     for (var i = 0; i < this.rows.length; i++) {
       console.log(i + ' :' + this.rows[i].obstacles[0].type);
