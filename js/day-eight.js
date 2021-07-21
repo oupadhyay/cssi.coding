@@ -6,7 +6,16 @@ var gravity = 0.2;
 var growth;
 var num = 50;
 var trails = -10;
-const arr = ["#152A3B", "#0D809C", "#F5C03E", "#D63826", "#EBEBD6"];
+const arr = ["#152A3B", "#0D809C", "#F5C03E", "#D63826", "#EBEBD6"].map(hex => hexToRgb(hex));
+
+const hexToRgb = hex =>
+    hex.replace(
+        /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+        (m, r, g, b) => `#${r}${r}${g}${g}${b}${b}`,
+    )
+    .substring(1)
+    .match(/.{2}/g)
+    .map(x => parseInt(x, 16));
 
 function preload() {
     firacode = loadFont("/cssi.coding/assets/Fira-Code.ttf");
@@ -27,7 +36,7 @@ async function setup() {
 }
 
 class Drop {
-    constructor () {
+    constructor() {
         var rand = _.random(0, arr.length);
         this.hue = arr[rand];
         this.x = random(width);
