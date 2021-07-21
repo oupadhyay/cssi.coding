@@ -1,11 +1,11 @@
 var drops = [];
 var gravity = 0.2;
 var growth;
-var num = 20;
+var num = 50;
 var trails = -10;
 
 async function setup() {
-    createCanvas(windowWidth - 1, windowHeight - 1);
+    createCanvas(windowWidth, windowHeight);
     growth = Math.max(windowWidth / 200, windowHeight / 200);
     background(25);
     for (var i = 0; i < num; i++) {
@@ -21,8 +21,8 @@ class Drop {
         this.w = 20;
         this.h = 10;
         this.length = 10;
-        this.speed = random(0, 2);
-        this.endY = random(2 * height / 3, height);
+        this.speed = random(0, 3);
+        this.endY = random(height / 2, height);
         this.falling = true;
     }
 
