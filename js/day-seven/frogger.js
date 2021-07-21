@@ -16,7 +16,7 @@ function resetLevel() {
 
 function setup() {
   spritesEngine = new spritesEngine();
-  width = 500;
+  let width = 500;
   level = new Level(grid_size, width, nbRows);
   var canvas = createCanvas(width, level.rows.length * grid_size);
   canvas.parent('#canvas');
@@ -25,20 +25,20 @@ function setup() {
 
 function draw() {
   background(0);
-  for(var i=0; i<level.backgroundRectangles.length; i++) {
-    var bg = level.backgroundRectangles[i];
+  for (i in level.backgroundRectangles) {
+    var bg = i;
     fill(bg.color.r, bg.color.g, bg.color.b);
     rect(bg.x0, bg.y0, bg.x1, bg.y1);
   }
 
   var intersects = null;
 
-  for(var i = 0; i < level.rows.length; i++) {
-    level.rows[i].show();
-    level.rows[i].update();
-    if(frog.intersects(level.rows[i])) {
-      intersects = level.rows[i].hits(frog);
-      if((intersects !== null) ^ level.rows[i].inverted) {
+  for (j in level.rows) {
+    j.show();
+    j.update();
+    if (frog.intersects(j)) {
+      intersects = j.hits(frog);
+      if ((intersects !== null) ^ j.inverted) {
         resetGame();
       }
     }

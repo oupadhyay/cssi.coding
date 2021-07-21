@@ -15,7 +15,6 @@ function Obstacle(x, y, w, h, s, i) {
   this.sprite = spritesEngine.getImage(this.type);
 }
 
-// Extend Rectangle
 Obstacle.prototype = Object.create(Rectangle.prototype);
 
 // Move this obstacle by its speed, and wrap it if off the screen.
