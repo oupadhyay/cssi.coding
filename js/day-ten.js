@@ -35,12 +35,12 @@ let value = 0;
 
 function preload() {
     soundFormats('m4a');
-    paddle = loadSound('assets/paddle.m4a');
-    wall = loadSound('/assets/wall.m4a');
-    score = loadSound('/assets/score.m4a');
+    paddle = loadSound('/cssi.coding/assets/paddle.m4a');
+    wall = loadSound('/cssi.coding/assets/wall.m4a');
+    score = loadSound('/cssi.coding/assets/score.m4a');
     score.setVolume(0.5);
     paddle.setVolume(0.8);
-    retroFont = loadFont('/assets/ARCADECLASSIC.TTF');
+    retroFont = loadFont('/cssi.coding/assets/ARCADECLASSIC.TTF');
 }
 
 function setup() {
