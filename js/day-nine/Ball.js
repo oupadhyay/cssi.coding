@@ -1,14 +1,12 @@
 class Ball {
-
     constructor (x, y, r, speed = 10) {
         this.spawn = createVector(x, y)
         this.speed = speed;
         this.r = r;
         this.resetball();
-        this.color = random(0, 360);
+        this.color = random(0, 360); // potential array moment?
     }
-
-
+    
     resetball() {
         this.pos = this.spawn.copy();
         let angle = random(-PI / 4, PI / 4)
@@ -17,7 +15,6 @@ class Ball {
     }
 
     outOfBounds() {
-
         // If the ball is out of the screen,
         // return the side, otherwise return false
 
@@ -92,7 +89,4 @@ class Ball {
         noStroke();
         ellipse(this.pos.x, this.pos.y, this.r * 2);
     }
-
-
-
 }
