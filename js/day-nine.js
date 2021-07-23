@@ -6,6 +6,8 @@ function preload() {
     paddle = loadSound('/cssi.coding/assets/paddle.m4a');
     wall = loadSound('/cssi.coding/assets/wall.m4a');
     score = loadSound('/cssi.coding/assets/score.m4a');
+    score.setVolume(0.5);
+    paddle.setVolume(0.8);
     retroFont = loadFont('/cssi.coding/assets/ARCADECLASSIC.TTF');
 }
 
