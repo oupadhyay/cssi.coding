@@ -6,7 +6,7 @@ function preload() {
 }
 
 function setup() {
-    // alert('-> A,Z for Player 1 and K,M  for Player 2\n'+'-> Spacebar to start and R to reset\n'+'Good Luck!');
+    alert('-> A,Z for Player 1 and K,M  for Player 2\n' + '-> Spacebar to start and R to reset\n' + 'Good Luck!');
 
     colorMode(HSB, 360, 100, 100, 255);
     createCanvas(windowWidth, windowHeight)
