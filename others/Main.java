@@ -13,7 +13,7 @@ public class Main {
             sum = 0;
         } else {
             var total = 1;
-            // TODO: add about case with zeros within the array
+            // add about case with zeros within the array
             for (var i = 0; i < arr.length; i++) {
                 total *= arr[i];
             }
