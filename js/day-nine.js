@@ -1,7 +1,11 @@
-let ball, p1, p2, retroFont;
+let ball, p1, p2, retroFont, paddle, wall, score;
 let go = false;
 
 function preload() {
+    soundFormats('m4a');
+    paddle = loadSound('/cssi.coding/assets/paddle.m4a');
+    wall = loadSound('/cssi.coding/assets/wall.m4a');
+    score = loadSound('/cssi.coding/assets/score.m4a');
     retroFont = loadFont('/cssi.coding/assets/ARCADECLASSIC.TTF');
 }
 
@@ -26,6 +30,7 @@ function draw() {
 
     let oob = ball.outOfBounds();
     if (oob) {
+        score.play();
         // the ball stays at spawn till go = true
         go = false;
         if (oob == 'right') {

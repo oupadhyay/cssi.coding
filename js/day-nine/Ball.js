@@ -31,7 +31,7 @@ class Ball {
             return 'left';
         }
 
-        return false;
+        return '';
 
     }
 
@@ -51,6 +51,7 @@ class Ball {
                     // ball collided
                     pad.color = ball.color;
                     ball.color = random(360);
+                    paddle.play();
 
                     let padCenter = createVector(pad.pos.x + pad.w / 2, pad.pos.y + pad.h / 2)
 
@@ -81,6 +82,7 @@ class Ball {
         if (this.pos.y + this.r >= height || this.pos.y - this.r <= 0) {
             this.pos.y = constrain(this.pos.y, this.r, height - this.r);
             this.vel.y *= -1;
+            wall.play();
         }
 
     }
