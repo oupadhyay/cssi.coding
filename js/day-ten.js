@@ -82,9 +82,9 @@ function draw() {
         noStroke();
         fill(0, 0, 80, 175);
         textSize(48);
-        text("Press  space  to  start", windowWidth / 2 - 200, textOffsetY);
-        text("Control  with  AZ  and  KM", windowWidth / 2 - 200, textOffsetY + 60);
-        text("R   to   restart", windowWidth / 2 - 200, textOffsetY + 120);
+        text("Press  space  to  start", windowWidth / 2, textOffsetY);
+        text("Control  with  AZ  and  KM", windowWidth / 2, textOffsetY + 60);
+        text("R   to   restart", windowWidth / 2, textOffsetY + 120);
     }
 }
 
