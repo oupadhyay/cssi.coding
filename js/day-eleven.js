@@ -1,61 +1,114 @@
-let backgroundColor, spherePosition, rectPosition
+const SPACING = 50;
+const MAX_JUMPS = 5;
+let movementChoices;
+let tripsP;
+let visitedP;
+let speedSlider;
+let firacode;
+
+function preload() {
+    firacode = loadFont("/cssi.coding/assets/Fira-Code.ttf");
+}
+
+
+class VisitsTracker {
+    constructor (maxJumps) {
+        this.maxJumps = maxJumps;
+        this.visitsArray = [];
+    }
+
+    visit(x, y) {
+        const i = this.getIndex(x, y);
+        let prevVisits = this.visitsArray[i];
+        return this.visitsArray[i] = (prevVisits || 0) + 1;
+    }
+
+    getIndex(x, y) {
+        const len = this.maxJumps * 2 + 1;
+        const x2 = x + this.maxJumps;
+        const y2 = y + this.maxJumps;
+        return y2 * len + x2;
+    }
+
+    visits() {
+        const v = [];
+        for (let x = -MAX_JUMPS; x <= MAX_JUMPS; x++) {
+            for (let y = -MAX_JUMPS; y <= MAX_JUMPS; y++) {
+                let numVisits = this.visitsArray[this.getIndex(x, y)];
+                if (numVisits) v.push([x, y, numVisits]);
+            }
+        }
+        return v;
+    }
+}
+
+const vt = new VisitsTracker(MAX_JUMPS);
 
 function setup() {
-    // Canvas & color settings
-    createCanvas(500, 400);
-    colorMode(HSB, 360, 100, 100);
-    backgroundColor = 95;
-    // This variable contains a JSON object
-    spherePosition = {
-        "x": 100,
-        "y": 100
-    }
-    rectPosition = {
-        "x": 130,
-        "y": 140
-    }
+    const SPACING = Math.min(40000 / windowWidth, 40000 / windowHeight);
+    createCanvas(windowWidth, windowHeight);
+    colorMode(HSB);
+    background('lightgray');
+    textFont(firacode, 14);
+    const cv = createVector;
+    movementChoices =
+        [cv(1, 0), cv(0, 1), cv(-1, 0), cv(0, -1)];
+    tripsP = createP();
+    visitedP = createP();
+    const startingSpeed = 1;
+    speedSlider =
+        createSlider(0, 30, startingSpeed).changed(() =>
+            frameRate(speedSlider.value()));
+    speedSlider.position(width - 0.75 * (SPACING * 0.7) - 200, height - 50);
+    speedSlider.style('width', '200px');
+    frameRate(startingSpeed);
 }
 
 function draw() {
-    background(backgroundColor);
-    ellipse(spherePosition.x, spherePosition.y, 20, 20);
-    rect(rectPosition.x, rectPosition.y, 20, 20);
-    // line(spherePosition.x, spherePosition.y, rectPosition.x, rectPosition.y)
+    translate(width / 2, height / 2);
+    background('lightgray');
+    noStroke();
+    fill(25);
 
-    let distance1 = computeDistance(spherePosition, rectPosition);
-    text(`The circle and sphere are ${round(distance1)} units apart.`, 20, 20);
+    text(`TRIPS: ${frameCount.toLocaleString()}`, -width / 2 + SPACING * 0.7, height / 2 - 50);
 
-    let mousePosition = {
-        "x": mouseX,
-        "y": mouseY
+    function drawNode(x, y, visitsCount, highlight) {
+        let width = SPACING * 0.7;
+        const visitsHueLimit = 100;
+        const hue = map(min(visitsHueLimit, visitsCount),
+            0, visitsHueLimit, 360 / 6, 0);
+        fill(hue, highlight ? 0 : 100, 100);
+        strokeWeight(3);
+        ellipse(x * SPACING, y * SPACING, width, width);
     }
-    let distance2 = computeDistance(spherePosition, mousePosition);
-    let distanceDescription = computeCategoryOfDistance(spherePosition, mousePosition);
-    text(`The circle and your mouse are ${round(distance2)} units apart; you're ${distanceDescription}.`, 20, 40);
-}
 
-function computeDistance(point1, point2) {
-    let deltaX = point1.x - point2.x;
-    let deltaY = point1.y - point2.y;
-    let distance = sqrt((deltaX ** 2) + (deltaY ** 2));
-    return distance; // returns a number
-}
+    function drawEdges(lp) {
+        stroke('gray');
+        strokeWeight(6);
 
-function computeCategoryOfDistance(point1, point2) {
-    let distance = computeDistance(point1, point2);
-    if (distance > 200) {
-        backgroundColor = color(240, 10, 100);
-        return "cold";
-    } else if (distance > 50) {
-        backgroundColor = color(120, 10, 100);
-        return "warmer";
-    } else {
-        backgroundColor = color(0, 10, 100);
-        return "red hot";
+        for (let i = 0; i < lp.length - 1; i++) {
+            const x1 = lp[i][0] * SPACING;
+            const y1 = lp[i][1] * SPACING;
+            const x2 = lp[i + 1][0] * SPACING;
+            const y2 = lp[i + 1][1] * SPACING;
+            line(x1, y1, x2, y2)
+        }
     }
-}
 
-function mousePressed() {
-    spherePosition.x = random(width);
-    spherePosition.y = random(height);
+    vt.visits().forEach(([x, y, visits]) =>
+        drawNode(x, y, visits, false));
+
+    const pos = createVector();
+    vt.visit(pos.x, pos.y);
+    const linePoints = [[pos.x, pos.y]];
+
+    drawNode(0, 0, 0, true);
+    for (let i = 0; i < MAX_JUMPS; i++) {
+        pos.add(random(movementChoices));
+        linePoints.push([pos.x, pos.y]);
+        const visits = vt.visit(pos.x, pos.y);
+        drawNode(pos.x, pos.y, visits, true);
+    }
+
+    drawEdges(linePoints);
 }

@@ -6,6 +6,7 @@ let firacode, textColor;
 let hue = 0;
 let globalS = 50;
 let globalB = 80;
+
 function preload() {
     firacode = loadFont("/cssi.coding/assets/Fira-Code.ttf");
 }
