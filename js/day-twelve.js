@@ -90,7 +90,7 @@ function draw() {
         rect(width, height, -xOffset, -height);
         if (canvas.width > 700) {
             push();
-            fill(255, 50);
+            fill(255, 90);
             stroke(255, 80);
             noStroke();
             textSize(blockSize * 0.4);

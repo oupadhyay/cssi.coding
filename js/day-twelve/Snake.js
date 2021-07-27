@@ -21,7 +21,6 @@ class Snake {
         this.noMoreAStar = false;
         this.lateGame = false;
         this.weWin = false;
-
     }
 
 
@@ -43,9 +42,9 @@ class Snake {
     show() {
         noStroke();
 
-        fill(0, 150, 0);
-
-        // this.survivalMode ? fill(200, 0, 0, 200) : fill(0, 200, 0);
+        fill(66, 140, 214);
+        // this.survivalMode ? fill(214, 66, 96, 200) : fill(66, 140, 214);
+        
         noStroke();
         rect(this.x * blockSize + outlineLength, this.y * blockSize + outlineLength, blockSize - outlineLength * 2, blockSize - outlineLength * 2);
 
