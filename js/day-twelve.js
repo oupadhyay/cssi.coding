@@ -154,22 +154,10 @@ function keyPressed() {
     }
     switch (key) {
         case ' ':
-            speedMultiplier = 10;
-            break;
-        case 'p':
-            pause = !pause;
-            break;
-        default:
-            break;
-    }
-}
-
-function keyReleased() {
-    switch (key) {
-        case ' ':
             speedMultiplier = 1;
             break;
         case 'p':
+            pause = !pause;
             break;
         default:
             break;
