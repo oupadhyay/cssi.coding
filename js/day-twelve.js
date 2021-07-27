@@ -19,6 +19,10 @@ let hc;
 let outlineLength = 3;
 let previousHeadPositions = [];
 
+function preload() {
+    firacode = loadFont("/cssi.coding/assets/Fira-Code.ttf");
+}
+
 function setup() {
     window.canvas = createCanvas(windowWidth - 18, windowHeight);
     canvas.position(0, 0);
@@ -91,6 +95,7 @@ function draw() {
             noStroke();
             textSize(blockSize * 0.4);
             textAlign(LEFT, CENTER);
+            textFont(firacode, 18);
             text("A PRETTY GOOD SNAKE AI", 30, canvas.height - 30);
             pop();
         }
