@@ -142,7 +142,7 @@ class Snake {
 
         }
         if (minDiist === 100000) {
-            print("AHHHHHHHHHHH");
+            // print("AHHHHHHHHHHH");
             // print(this.x,this.y);
             // print(possibleNextPositions);
             // print((hc.getNodeNo(this.x,this.y)+1)%this.cycle.length);

@@ -26,7 +26,7 @@ class HamiltonianCycle {
 
             for (let other of currentSpanningTreeNode.spanningTreeAdjacentNodes) {
                 let connectNodes = (x1, y1, x2, y2) => {
-                    print(x1, y1, x2, y2);
+                    // print(x1, y1, x2, y2);
                     if (y1 + this.h * (x1) >= cycleNodes.length || y2 + this.h * (x2) >= cycleNodes.length) {
                         return;
                     }
@@ -68,7 +68,7 @@ class HamiltonianCycle {
             //add that direction again to get the next node
             d.x += n.x;
             d.y += n.y;
-            print(d, n, d.y + this.h * d.x, cycleNodes[d.y + this.h * d.x]);
+            // print(d, n, d.y + this.h * d.x, cycleNodes[d.y + this.h * d.x]);
             //d now points to the new node
             let newEdge = new HEdge(cycleNodes[d.y + this.h * d.x], n);
             let uniqueEdge = true;
@@ -86,7 +86,7 @@ class HamiltonianCycle {
         }
 
         for (let e of newEdges) {
-            print(e);
+            // print(e);
             e.connectNodes();
         }
 
@@ -128,12 +128,12 @@ class HamiltonianCycle {
         }
 
 
-        print(cycleNodes);
-        for (let n of cycleNodes) {
-            if (n.spanningTreeAdjacentNodes.length !== 2) {
-                print("oof", n);
-            }
-        }
+        // print(cycleNodes);
+        // for (let n of cycleNodes) {
+        //     if (n.spanningTreeAdjacentNodes.length !== 2) {
+        //         print("oof", n);
+        //     }
+        // }
 
         cycle = [cycleNodes.getRandomElement()];
 
@@ -148,14 +148,14 @@ class HamiltonianCycle {
             }
 
             if (next.spanningTreeAdjacentNodes.length !== 2) {
-                print("oof", next);
+                // print("oof", next);
             }
             cycle.push(node);
             previous = node;
             node = next;
         }
 
-        print(cycle);
+        // print(cycle);
         this.cycle = cycle;
         for (let i = 0; i < this.cycle.length; i++) {
             this.cycle[i].cycleNo = i;
@@ -250,13 +250,13 @@ class HamiltonianCycle {
         //spanning tree created
         for (let n of stNodes) {
             if (!nodesInSpanningTree.includes(n)) {
-                print("noooooo");
+                // print("noooooo");
             }
         }
 
 
         this.spanningTree = spanningTree;
-        print(spanningTree);
+        // print(spanningTree);
         this.spanningTreeNodes = stNodes;
     }
 

@@ -58,13 +58,13 @@ class Path {
         return { x, y };
     }
 
-    print() {
-        //     print("YAY we got one");
-        for (var n of this.nodesInPath) {
-            print(n);
-            // print(n);
-        }
-    }
+    // print() {
+    //     //     print("YAY we got one");
+    //     for (var n of this.nodesInPath) {
+    //         print(n);
+    //         // print(n);
+    //     }
+    // }
 
     nodeInPath(n) {
         for (let node of this.nodesInPath) {
@@ -292,12 +292,12 @@ function createHamiltonianCycle() {
 
 
     while (true) {
-        print(bigList.length);
+        // print(bigList.length);
 
 
         let currentPath = bigList.shift();
         if (currentPath.nodesInPath.length === nodes.length) {
-            currentPath.print();
+            // currentPath.print();
             return currentPath;
         }
         let finalNodeInPath = currentPath.getLastNode();
@@ -614,7 +614,7 @@ function survivalMode2() {
             }
         }
         if (bigList.length === 0) {
-            print("made it to " + i);
+            // print("made it to " + i);
             break;
         }
         pathOptions = [...bigList];
@@ -636,7 +636,7 @@ function survivalMode2() {
     }
 
 
-    print(bestPath);
+    // print(bestPath);
     return bestPath;
 
 }

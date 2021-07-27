@@ -7,14 +7,12 @@ class Apple {
             this.x = floor(random(blocksX));
             this.y = floor(random(blocksY));
         }
-        print(snake, this);
+        // print(snake, this);
     }
 
     show() {
         noStroke();
-        fill(0, 150, 0);
-        // fill(100);
-        // fill(255, 0, 0);\
+        fill(214, 66, 66);
         push();
         translate(this.x * blockSize + outlineLength, this.y * blockSize + outlineLength);
         scale((blockSize - 2 * outlineLength) / 3.0);

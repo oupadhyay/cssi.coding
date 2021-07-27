@@ -136,43 +136,42 @@ function draw() {
 function keyPressed() {
     switch (keyCode) {
         case UP_ARROW:
-            s.velX = 0;
-            s.velY = -1;
             pause = false;
             frameRate(30);
             break;
         case DOWN_ARROW:
-            s.velX = 0;
-            s.velY = 1;
             pause = false;
             frameRate(10);
             break;
-        // case LEFT_ARROW:
-        //     s.velX = -1;
-        //     s.velY = 0;
-        //     pause = false;
-        //
-        //     break;
-        // case RIGHT_ARROW:
-        //     s.velX = 1;
-        //     s.velY = 0;
-        //     pause = false;
-        //
-        //     break;
-
+        case LEFT_ARROW:
+            pause = false;
+            speedMultiplier /= 1.2;
+            break;
+        case RIGHT_ARROW:
+            pause = false;
+            speedMultiplier *= 1.2;
+            break;
     }
     switch (key) {
         case ' ':
             speedMultiplier = 10;
             break;
-
+        case 'p':
+            pause = !pause;
+            break;
+        default:
+            break;
     }
-
 }
 
 function keyReleased() {
     switch (key) {
         case ' ':
             speedMultiplier = 1;
+            break;
+        case 'p':
+            break;
+        default:
+            break;
     }
 }
