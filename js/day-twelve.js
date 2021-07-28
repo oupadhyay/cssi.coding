@@ -1,11 +1,14 @@
-// var blocksX = 160;
-// var blocksY = 80;
+/**
+ * Author: Ojasw Upadhyay
+ *
+ * Most of the coding and intuition behind this program is based on the following video from CodingBullet:
+ * https://www.youtube.com/watch?v=tjQIO1rqTBE
+ */
+
 var blocksX = 40;
-// var blocksX = 16;
 var blocksY = 20;
 
 let maxBlocks = 1000;
-// var blocksY = 8;
 let blockSize;
 let xOffset = 0;
 let yOffset = 0;
@@ -15,7 +18,7 @@ let noDieMode = true;
 let pause = false;
 
 let speedMultiplier = 1;
-let hc;
+let hc, firacode;
 let outlineLength = 3;
 let previousHeadPositions = [];
 
@@ -26,7 +29,7 @@ function preload() {
 function setup() {
     window.canvas = createCanvas(windowWidth - 18, windowHeight);
     canvas.position(0, 0);
-    window.canvas.style('z-index', 1);
+    window.canvas.style("z-index", 1);
     setBlocks();
     blockSize = min(width / blocksX, height / blocksY);
     outlineLength = blockSize / 15;
@@ -38,30 +41,27 @@ function setup() {
     hc = new HamiltonianCycle(blocksX, blocksY);
     s.resetOnHamiltonian(hc.cycle);
     frameRate(30);
-
-
-    // .touchStarted(onclick);
-
-
 }
 
 function setBlocks() {
-
     let testBlockSize = 1;
     while (true) {
-        if (floor(canvas.width / testBlockSize) * floor(canvas.height / testBlockSize) < maxBlocks) {
-
-
+        if (
+            floor(canvas.width / testBlockSize) *
+            floor(canvas.height / testBlockSize) <
+            maxBlocks
+        ) {
             blockSize = testBlockSize;
-            blocksX = floor(canvas.width / blockSize) - floor(canvas.width / blockSize) % 2;
-            blocksY = floor(canvas.height / blockSize) - floor(canvas.height / blockSize) % 2;
+            blocksX =
+                floor(canvas.width / blockSize) - (floor(canvas.width / blockSize) % 2);
+            blocksY =
+                floor(canvas.height / blockSize) -
+                (floor(canvas.height / blockSize) % 2);
             return;
         } else {
             testBlockSize++;
         }
     }
-
-
 }
 
 function windowResized() {
@@ -72,7 +72,6 @@ function windowResized() {
     yOffset = (height - blockSize * blocksY) / 2.0;
     onResize();
 }
-
 
 function draw() {
     if (!pause) {
@@ -102,36 +101,14 @@ function draw() {
         push();
         translate(xOffset, yOffset);
 
-        // for(let pos of previousHeadPositions){
-        //     fill(20,240);
-        //     stroke(20,60);
-        //     strokeWeight(1);
-        //     rect(pos.x*blockSize,pos.y*blockSize,blockSize,blockSize);
-        // }
-
         fill(0);
         s.show();
-        // hc.show();
         for (let i = 0; i < speedMultiplier; i++) {
             s.update();
-            // let headPos = {x:s.x,y:s.y};
-            // let unique = true;
-            // for(let pos of previousHeadPositions){
-            //     if(pos.x ==headPos.x && pos.y ==headPos.y){
-            //         unique=false;
-            //         break;
-            //     }
-            // }
-            // if(unique){
-            //     previousHeadPositions.push(headPos);
-            // }
         }
         pop();
-
-
     }
 }
-
 
 function keyPressed() {
     switch (keyCode) {
@@ -153,10 +130,10 @@ function keyPressed() {
             break;
     }
     switch (key) {
-        case ' ':
+        case " ":
             speedMultiplier = 1;
             break;
-        case 'p':
+        case "p":
             pause = !pause;
             break;
         default:
