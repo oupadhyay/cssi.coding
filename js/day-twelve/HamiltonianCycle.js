@@ -23,7 +23,6 @@ class HamiltonianCycle {
 
             for (let other of currentSpanningTreeNode.spanningTreeAdjacentNodes) {
                 let connectNodes = (x1, y1, x2, y2) => {
-                    // print(x1, y1, x2, y2);
                     if (
                         y1 + this.h * x1 >= cycleNodes.length ||
                         y2 + this.h * x2 >= cycleNodes.length
@@ -41,14 +40,6 @@ class HamiltonianCycle {
                 let y = currentSpanningTreeNode.y * 2;
 
                 if (direction.x === 1) {
-                    //is to the right
-                    //CONNECT THEM
-                    /*
-                               *    *----*    *
-                                  a         b
-                               *    *----*    *
-
-                               */
                     connectNodes(x + 1, y, x + 2, y);
                     connectNodes(x + 1, y + 1, x + 2, y + 1);
                 } else if (direction.y === 1) {
@@ -396,7 +387,6 @@ class HPath {
     }
 
     setDistanceToApple() {
-        // this.distanceToApple = s.getDistanceBetweenPoints(this.getLastNode().cycleNo,this.finishNode.cycleNo);
         this.distanceToApple = dist(
             this.finishNode.x,
             this.finishNode.y,

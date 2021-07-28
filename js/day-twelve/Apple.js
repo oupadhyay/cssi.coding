@@ -24,7 +24,6 @@ class Apple {
         rect(2, 1, 1, 1);
 
         pop();
-        // rect(this.x * blockSize + outlineLength, this.y * blockSize + outlineLength, , blockSize - 2*outlineLength);
     }
 
     isAtPosition(x, y) {
