@@ -56,7 +56,7 @@ function changeColor() { // U did entire function
 function preload() { // U did entire function
     font = loadFont('/cssi.coding/assets/HelveticaNeue-Regular.otf');
     song = loadSound('/cssi.coding/assets/' + playlist[songnumber] + '.mp3');
-    var volume = 0.008;
+    var volume = 0.05;
     song.setVolume(volume);
 }
 
